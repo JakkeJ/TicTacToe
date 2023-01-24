@@ -1,6 +1,6 @@
 fun main() {
     var game = TicTacToe()
-    game.print()
+    game.createBoard()
 }
 
 abstract class Game {
@@ -16,20 +16,27 @@ class TicTacToe: Game() {
     override val type = "Board Game"
     override val numberOfPlayers = 2
 
-    fun print(){
-        println(type)
+    val empty = " "
+    val row1 = mutableListOf<String>(empty, empty, empty)
+    val row2 = mutableListOf<String>(empty, empty, empty)
+    val row3 = mutableListOf<String>(empty, empty, empty)
+
+    fun createBoard(){
+        println(this.row1)
+        println(this.row2)
+        println(this.row3)
     }
 
-    fun checkRows(){
-
+    fun checkRows(): Int{
+        return -1
     }
 
-    fun checkColumns(){
-
+    fun checkColumns(): Int{
+        return -1
     }
 
-    fun checkDiagonals(){
-
+    fun checkDiagonals(): Int{
+        return -1
     }
 
     fun printGameBoard(){
