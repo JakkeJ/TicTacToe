@@ -9,7 +9,8 @@ abstract class Game {
 }
 
 interface GameBoard {
-    fun setSize()
+    fun setSize(): Int
+    fun isValidMove(): Boolean
 }
 
 class Player {
@@ -20,19 +21,25 @@ class TicTacToe: Game(),GameBoard {
     override val type = "Board Game"
     override val numberOfPlayers = 2
 
-    override fun setSize(){
-        return
+    private val ticTacToeBoard = mutableListOf<MutableList<String>>()
+    private val empty = " "
+
+    private val columns = 3
+    private val rows = 3
+    override fun setSize(): Int {
+        return -1
     }
-    
-    val empty = " "
-    val row1 = mutableListOf<String>(empty, empty, empty)
-    val row2 = mutableListOf<String>(empty, empty, empty)
-    val row3 = mutableListOf<String>(empty, empty, empty)
+
+    override fun isValidMove():Boolean{
+        return true
+    }
 
     fun createBoard(){
-        println(this.row1)
-        println(this.row2)
-        println(this.row3)
+        for (i in 1..rows){
+            ticTacToeBoard.add(mutableListOf(empty, empty, empty))}
+        println(this.ticTacToeBoard[0])
+        println(this.ticTacToeBoard[1])
+        println(this.ticTacToeBoard[2])
     }
 
     fun checkRows(): Int{
@@ -48,10 +55,6 @@ class TicTacToe: Game(),GameBoard {
     }
 
     fun printGameBoard(){
-
-    }
-
-    fun isValidMove(){
 
     }
 }
