@@ -1,6 +1,7 @@
 fun main() {
     val game = TicTacToe()
     game.createBoard()
+    game.startGame()
 }
 
 abstract class Game {
@@ -13,7 +14,7 @@ interface GameBoard {
     fun isValidMove(): Boolean
 }
 
-class Player {
+class Player(val name: String, val score: Int = 0) {
 
 }
 
@@ -22,7 +23,7 @@ class TicTacToe: Game(),GameBoard {
     override val numberOfPlayers = 2
 
     private val ticTacToeBoard = mutableListOf<MutableList<String>>()
-    private val empty = " "
+    private val empty = "-"
 
     private val columns = 3
     private val rows = 3
@@ -37,9 +38,9 @@ class TicTacToe: Game(),GameBoard {
     fun createBoard(){
         for (i in 1..rows){
             ticTacToeBoard.add(mutableListOf(empty, empty, empty))}
-        println(this.ticTacToeBoard[0])
-        println(this.ticTacToeBoard[1])
-        println(this.ticTacToeBoard[2])
+        //println(ticTacToeBoard[0])
+        //println(ticTacToeBoard[1])
+        //println(ticTacToeBoard[2])
     }
 
     fun checkRows(): Int{
@@ -55,6 +56,17 @@ class TicTacToe: Game(),GameBoard {
     }
 
     fun printGameBoard(){
+        println("Tic Tac Toe")
+        for (i in 0..2){
+            println(" ${ticTacToeBoard[i][0]}   ${ticTacToeBoard[i][1]}   ${ticTacToeBoard[i][2]}")}
+    }
 
+    fun startGame(){
+        var player1 = Player("Jim")
+        var player2 = Player("Hogne")
+        while(true){
+            printGameBoard()
+            break
+        }
     }
 }
