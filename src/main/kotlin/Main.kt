@@ -1,5 +1,5 @@
 fun main() {
-    var game = TicTacToe()
+    val game = TicTacToe()
     game.createBoard()
 }
 
@@ -8,14 +8,22 @@ abstract class Game {
     abstract val numberOfPlayers: Int
 }
 
+interface GameBoard {
+    fun setSize()
+}
+
 class Player {
 
 }
 
-class TicTacToe: Game() {
+class TicTacToe: Game(),GameBoard {
     override val type = "Board Game"
     override val numberOfPlayers = 2
 
+    override fun setSize(){
+        return
+    }
+    
     val empty = " "
     val row1 = mutableListOf<String>(empty, empty, empty)
     val row2 = mutableListOf<String>(empty, empty, empty)
