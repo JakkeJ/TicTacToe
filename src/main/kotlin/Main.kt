@@ -33,62 +33,44 @@ class TicTacToe: Game(),GameBoard {
 
 
     override fun isValidMove():Boolean{
+
         return true
     }
 
-    fun createBoard()
-    {
-        for (i in 1..setSize())
-        {
-            ticTacToeBoard.add(mutableListOf("-", "-", "-"))
-        }
+    fun createBoard() {
+        for (i in 1..setSize()) {
+            ticTacToeBoard.add(mutableListOf("-", "-", "-"))}
     }
 
-    fun checkRows(): Int
-    {
-        for (i in ticTacToeBoard)
-        {
-            if (i[0] == i[1] && i[0] == i[2] && i[0] != "-" && i[0] == "X")
-            {
-                return 0
-            }
-            if (i[0] == i[1] && i[0] == i[2] && i[0] != "-" && i[0] == "O")
-            {
-                return 1
-            }
+    fun checkRows(): Int {
+        for (i in ticTacToeBoard) {
+            if (i[0] == i[1] && i[0] == i[2] && i[0] != "-" && i[0] == "X") {
+                return 0 }
+            if (i[0] == i[1] && i[0] == i[2] && i[0] != "-" && i[0] == "O") {
+                return 1 }
         }
         return -1
     }
 
-    fun checkColumns(): Int
-    {
+    fun checkColumns(): Int {
         if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][0] == ticTacToeBoard[2][0] && ticTacToeBoard[0][0] == "X" ||
             ticTacToeBoard[0][1] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][1] && ticTacToeBoard[0][1] == "X" ||
-            ticTacToeBoard[0][2] == ticTacToeBoard[1][2] && ticTacToeBoard[1][2] == ticTacToeBoard[2][2] && ticTacToeBoard[0][2] == "X")
-        {
-            return 0
-        }
+            ticTacToeBoard[0][2] == ticTacToeBoard[1][2] && ticTacToeBoard[1][2] == ticTacToeBoard[2][2] && ticTacToeBoard[0][2] == "X") {
+            return 0 }
         if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][0] == ticTacToeBoard[2][0] && ticTacToeBoard[0][0] == "O" ||
             ticTacToeBoard[0][1] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][1] && ticTacToeBoard[0][1] == "O" ||
-            ticTacToeBoard[0][2] == ticTacToeBoard[1][2] && ticTacToeBoard[1][2] == ticTacToeBoard[2][2] && ticTacToeBoard[0][2] == "O")
-        {
-            return 1
-        }
+            ticTacToeBoard[0][2] == ticTacToeBoard[1][2] && ticTacToeBoard[1][2] == ticTacToeBoard[2][2] && ticTacToeBoard[0][2] == "O") {
+            return 1 }
         return -1
     }
 
-    fun checkDiagonals(): Int
-    {
+    fun checkDiagonals(): Int {
         if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "X" ||
-            ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X")
-        {
-            return 0
-        }
+            ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X") {
+            return 0 }
         if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "O" ||
-            ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O")
-        {
-            return 1
-        }
+            ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O") {
+            return 1 }
         return -1
     }
 
@@ -100,8 +82,17 @@ class TicTacToe: Game(),GameBoard {
 
     fun startGame(player1: Player, player2: Player){
         println(player1.name)
+        var winner:Int = 0
+        var activePlayer = player1
         while(true){
             printGameBoard()
+            val rows = checkRows()
+            val columns = checkColumns()
+            val diagonals = checkDiagonals()
+            if (rows != -1){ winner = rows }
+            if (columns != -1){ winner = columns }
+            if (diagonals != -1){ winner = diagonals }
+
             break
         }
     }
