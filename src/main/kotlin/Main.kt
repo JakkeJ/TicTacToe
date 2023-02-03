@@ -31,13 +31,15 @@ class Player(var name: String, val playerNumber: Int, var score: Int = 0)
 class TicTacToe(private var player1: Player, private var player2: Player): Game(),GameBoard {
     init{
         clearScreen()
-        println("How to play:")
+        val red = "\u001b[31m"
+        val reset = "\u001b[0m"
+        println(red + "How to play:")
         println("You use 1-9 to select your square, like the pattern below:")
         println(" 1   2   3")
         println(" 4   5   6")
         println(" 7   8   9")
         println("-Let's go-")
-        println("----------")
+        println("----------" + reset)
     }
     private var player1Mark = "X"
     private var player2Mark = "O"
@@ -57,12 +59,11 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     }
 
     override fun isValidMove(row: Int, column: Int, player: Int): Boolean{
-        try{
-        val checkedCell = ticTacToeBoard[row][column]
-        return checkedCell == "-"
-        }
-        catch (e: IndexOutOfBoundsException){
-            return false
+        return try{
+            val checkedCell = ticTacToeBoard[row][column]
+            checkedCell == "-"
+        } catch (e: IndexOutOfBoundsException){
+            false
         }
     }
 
@@ -110,16 +111,18 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
 
     //Check who wins
     private fun checkWinner(winList: List<String>, typeOfWin: String){
+        val red = "\u001b[31m"
+        val reset = "\u001b[0m"
         if (winList[1] == player1Mark){
             println("Congratulations, ${player1.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}")
             player1.score++
             println("The score is now:")
-            println("${player1.name} ${player1.score} - ${player2.score} ${player2.name}")
+            println("$red ${player1.name} ${player1.score} - ${player2.score} ${player2.name} $reset")
         } else if(winList[1] == player2Mark){
             println("Congratulations, ${player2.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}")
             player2.score++
             println("The score is now:")
-            println("${player1.name} ${player1.score} - ${player2.score} ${player2.name}")
+            println("$red ${player1.name} ${player1.score} - ${player2.score} ${player2.name} $reset")
         }
     }
 
@@ -136,6 +139,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
             }
         }
     }
+    //Resets the game board
     private fun resetGameBoard(){
         clearScreen()
         println("Swapping who plays first")
@@ -191,7 +195,6 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     //Game loop
     fun startGame(){
         createBoard(3)
-        clearScreen()
         while(true){
             printGameBoard()
             val rows = checkRows()
