@@ -47,14 +47,15 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
         println("-Let's go-")
         println("----------" + RESET)
     }
-    private var player1Mark = "${YELLOW}X$RESET"
-    private var player2Mark = "${MAGENTA}O$RESET"
+    private var player1Mark = "X"
+    private var player2Mark = "O"
     private var activePlayer = player1
     private var activePlayerMark = player1Mark
 
     override val type = "Simple Board Game"
     override val numberOfPlayers = 2
     private var ticTacToeBoard = mutableListOf<MutableList<String>>()
+    private var ticTacToeBoardPrint = mutableListOf<MutableList<String>>()
 
     //Lambda expression to check if a value is a number between 0 and 9 or not, returns bool
     private val isANumber = { toCheck: String -> toCheck.toDoubleOrNull() != null }
@@ -76,15 +77,16 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     override fun createBoard(boardSize: Int){
         for (i in 0 until boardSize) {
             ticTacToeBoard.add(mutableListOf("-", "-", "-"))
+            ticTacToeBoardPrint.add(mutableListOf("-", "-", "-"))
         }
     }
     private fun checkRows(): List<String> {
         for (i in 0..2) {
-            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "${YELLOW}X$RESET") {
-                return listOf(i.toString(),"${YELLOW}X$RESET")
+            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "X") {
+                return listOf(i.toString(),"X")
             }
-            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "${MAGENTA}O$RESET") {
-                return listOf(i.toString(),"${MAGENTA}O$RESET")
+            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "O") {
+                return listOf(i.toString(),"O")
             }
         }
         return listOf("-1","-")
@@ -100,10 +102,10 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     }
 
     private fun checkDiagonals(): List<String> {
-        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "X") { return listOf("1","${YELLOW}X$RESET") }
-        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X") { return listOf("2","${YELLOW}X$RESET") }
-        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "O") { return listOf("1","${MAGENTA}O$RESET") }
-        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O") { return listOf("2","${MAGENTA}O$RESET") }
+        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "X") { return listOf("1","X") }
+        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X") { return listOf("2","X") }
+        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "O") { return listOf("1","O") }
+        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O") { return listOf("2","O") }
         return listOf("-1","-")
     }
 
@@ -112,21 +114,21 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
         println("Tic Tac Toe")
         for (i in 0..2){
             if (ticTacToeBoard[i][0] == "X"){
-                ticTacToeBoard[i][0] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][0] = "${YELLOW}X$RESET"
             } else if (ticTacToeBoard[i][0] == "O"){
-                ticTacToeBoard[i][0] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][0] = "${MAGENTA}O$RESET"
             }
             if (ticTacToeBoard[i][1] == "X"){
-                ticTacToeBoard[i][1] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][1] = "${YELLOW}X$RESET"
             } else if (ticTacToeBoard[i][1] == "O"){
-                ticTacToeBoard[i][1] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][1] = "${MAGENTA}O$RESET"
             }
             if (ticTacToeBoard[i][2] == "X"){
-                ticTacToeBoard[i][2] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][2] = "${YELLOW}X$RESET"
             } else if (ticTacToeBoard[i][2] == "O"){
-                ticTacToeBoard[i][2] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][2] = "${MAGENTA}O$RESET"
             }
-            println(" ${ticTacToeBoard[i][0]}   ${ticTacToeBoard[i][1]}   ${ticTacToeBoard[i][2]}")
+            println(" ${ticTacToeBoardPrint[i][0]}   ${ticTacToeBoardPrint[i][1]}   ${ticTacToeBoardPrint[i][2]}")
         }
     }
 
@@ -165,6 +167,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
         println("$MAGENTA ${player2.name}, you are now playing first!$RESET")
         println("")
         ticTacToeBoard = mutableListOf()
+        ticTacToeBoardPrint = mutableListOf()
         createBoard(3)
         val tempMark = player1Mark
         player1Mark = player2Mark
@@ -221,7 +224,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
             val diagonals = checkDiagonals()
             val currentValidMoves = validMoves()
             for (i in currentValidMoves){
-                print("$CYAN $i$RESET, ")
+                print("$CYAN$i$RESET, ")
             }
 
             println("")
