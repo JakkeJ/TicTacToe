@@ -1,4 +1,12 @@
-import java.lang.IndexOutOfBoundsException
+const val BLACK = "\u001B[30m"
+const val RED = "\u001B[31m"
+const val GREEN = "\u001B[32m"
+const val YELLOW = "\u001B[33m"
+const val BLUE = "\u001B[34m"
+const val MAGENTA = "\u001B[35m"
+const val CYAN = "\u001B[36m"
+const val WHITE = "\u001B[37m"
+const val RESET = "\u001b[0m"
 
 fun main() {
     print("Type in the first players name: ")
@@ -31,18 +39,16 @@ class Player(var name: String, val playerNumber: Int, var score: Int = 0)
 class TicTacToe(private var player1: Player, private var player2: Player): Game(),GameBoard {
     init{
         clearScreen()
-        val red = "\u001b[31m"
-        val reset = "\u001b[0m"
-        println(red + "How to play:")
+        println(BLUE + "How to play:")
         println("You use 1-9 to select your square, like the pattern below:")
         println(" 1   2   3")
         println(" 4   5   6")
         println(" 7   8   9")
         println("-Let's go-")
-        println("----------" + reset)
+        println("----------" + RESET)
     }
-    private var player1Mark = "X"
-    private var player2Mark = "O"
+    private var player1Mark = "${YELLOW}X$RESET"
+    private var player2Mark = "${MAGENTA}O$RESET"
     private var activePlayer = player1
     private var activePlayerMark = player1Mark
 
@@ -74,11 +80,11 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     }
     private fun checkRows(): List<String> {
         for (i in 0..2) {
-            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "X") {
-                return listOf(i.toString(),"X")
+            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "${YELLOW}X$RESET") {
+                return listOf(i.toString(),"${YELLOW}X$RESET")
             }
-            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "O") {
-                return listOf(i.toString(),"O")
+            if (ticTacToeBoard[i][0] == ticTacToeBoard[i][1] && ticTacToeBoard[i][1] == ticTacToeBoard[i][2] && ticTacToeBoard[i][0] == "${MAGENTA}O$RESET") {
+                return listOf(i.toString(),"${MAGENTA}O$RESET")
             }
         }
         return listOf("-1","-")
@@ -94,10 +100,10 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     }
 
     private fun checkDiagonals(): List<String> {
-        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "X") { return listOf("1","X") }
-        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X") { return listOf("2","X") }
-        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "O") { return listOf("1","O") }
-        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O") { return listOf("2","O") }
+        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "X") { return listOf("1","${YELLOW}X$RESET") }
+        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "X") { return listOf("2","${YELLOW}X$RESET") }
+        if (ticTacToeBoard[0][0] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][2] && ticTacToeBoard[0][0] == "O") { return listOf("1","${MAGENTA}O$RESET") }
+        if (ticTacToeBoard[0][2] == ticTacToeBoard[1][1] && ticTacToeBoard[1][1] == ticTacToeBoard[2][0] && ticTacToeBoard[0][2] == "O") { return listOf("2","${MAGENTA}O$RESET") }
         return listOf("-1","-")
     }
 
@@ -105,45 +111,58 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     private fun printGameBoard(){
         println("Tic Tac Toe")
         for (i in 0..2){
+            if (ticTacToeBoard[i][0] == "X"){
+                ticTacToeBoard[i][0] = "${YELLOW}X$RESET"
+            } else if (ticTacToeBoard[i][0] == "O"){
+                ticTacToeBoard[i][0] = "${MAGENTA}O$RESET"
+            }
+            if (ticTacToeBoard[i][1] == "X"){
+                ticTacToeBoard[i][1] = "${YELLOW}X$RESET"
+            } else if (ticTacToeBoard[i][1] == "O"){
+                ticTacToeBoard[i][1] = "${MAGENTA}O$RESET"
+            }
+            if (ticTacToeBoard[i][2] == "X"){
+                ticTacToeBoard[i][2] = "${YELLOW}X$RESET"
+            } else if (ticTacToeBoard[i][2] == "O"){
+                ticTacToeBoard[i][2] = "${MAGENTA}O$RESET"
+            }
             println(" ${ticTacToeBoard[i][0]}   ${ticTacToeBoard[i][1]}   ${ticTacToeBoard[i][2]}")
         }
     }
 
     //Check who wins
     private fun checkWinner(winList: List<String>, typeOfWin: String){
-        val red = "\u001b[31m"
-        val reset = "\u001b[0m"
         if (winList[1] == player1Mark){
-            println("Congratulations, ${player1.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}")
+            println("${GREEN}Congratulations, ${player1.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}$RESET")
             player1.score++
             println("The score is now:")
-            println("$red ${player1.name} ${player1.score} - ${player2.score} ${player2.name} $reset")
+            println("${GREEN}${player1.name} ${player1.score} - ${player2.score} ${player2.name} $RESET")
         } else if(winList[1] == player2Mark){
-            println("Congratulations, ${player2.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}")
+            println("${GREEN}Congratulations, ${player2.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}$RESET")
             player2.score++
             println("The score is now:")
-            println("$red ${player1.name} ${player1.score} - ${player2.score} ${player2.name} $reset")
+            println("${GREEN}${player1.name} ${player1.score} - ${player2.score} ${player2.name} $RESET")
         }
     }
 
     //Restarts the game if input is Y or y
     private fun restartGame(): String{
         while (true) {
-            print("Enter Y to start a new game, N to quit: ")
+            print("Enter$GREEN Y$RESET to start a new game,$RED N$RESET to quit: ")
             val input = readln().lowercase()
             if (input == "y" || input == "n") {
-                if(input == "n"){ println("Quitting") }
+                if(input == "n"){ println("$MAGENTA Quitting $RESET") }
                 return input
             } else {
-                println("Invalid input, please try again.")
+                println("$RED Invalid input, please try again.$RESET")
             }
         }
     }
     //Resets the game board
     private fun resetGameBoard(){
         clearScreen()
-        println("Swapping who plays first")
-        println("${player2.name}, you are now playing first!")
+        println("$BLUE Swapping who plays first$RESET")
+        println("$MAGENTA ${player2.name}, you are now playing first!$RESET")
         println("")
         ticTacToeBoard = mutableListOf()
         createBoard(3)
@@ -202,7 +221,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
             val diagonals = checkDiagonals()
             val currentValidMoves = validMoves()
             for (i in currentValidMoves){
-                print("$i ")
+                print("$CYAN $i$RESET, ")
             }
 
             println("")
@@ -237,7 +256,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
             if (currentValidMoves.isEmpty()){
                 println("The game is a tie!")
                 println("The score is now:")
-                println("${player1.name} ${player1.score} - ${player2.score} ${player2.name}")
+                println("$YELLOW ${player1.name} ${player1.score} - ${player2.score} ${player2.name}$RESET")
                 if (restartGame() == "y"){
                     resetGameBoard()
                     continue
@@ -251,7 +270,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
 
             while (validateInput(playerInput, isANumber)){
                 printValidMoves(currentValidMoves)
-                println("Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:")
+                println("$RED Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:$RESET")
                 playerInput = readln()
             }
             var listIndices = cleanPlayerInput(playerInput)
@@ -259,11 +278,11 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
 
             while (!isValid){
                 printValidMoves(currentValidMoves)
-                println("Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:")
+                println("$RED Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:$RESET")
                 playerInput = readln()
                 while (validateInput(playerInput, isANumber)){
                     printValidMoves(currentValidMoves)
-                    println("Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:")
+                    println("$RED Not a valid move! ${activePlayer.name}, you are ${activePlayerMark}, enter a valid move:$RESET")
                     playerInput = readln()
                 }
                 listIndices = cleanPlayerInput(playerInput)
