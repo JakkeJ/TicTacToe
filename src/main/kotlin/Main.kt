@@ -8,6 +8,9 @@ const val CYAN = "\u001B[36m"
 const val WHITE = "\u001B[37m"
 const val RESET = "\u001b[0m"
 
+const val X_COLOR = YELLOW
+const val O_COLOR = MAGENTA
+
 fun main() {
     print("Type in the first players name: ")
     val player1 = Player(readln(), 1)
@@ -45,7 +48,7 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
         println(" 4   5   6")
         println(" 7   8   9")
         println("-Let's go-")
-        println("----------" + RESET)
+        println("----------$RESET")
     }
     private var player1Mark = "X"
     private var player2Mark = "O"
@@ -112,21 +115,22 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     //Prints the game board
     private fun printGameBoard(){
         println("Tic Tac Toe")
+
         for (i in 0..2){
             if (ticTacToeBoard[i][0] == "X"){
-                ticTacToeBoardPrint[i][0] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][0] = "${X_COLOR}X$RESET"
             } else if (ticTacToeBoard[i][0] == "O"){
-                ticTacToeBoardPrint[i][0] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][0] = "${O_COLOR}O$RESET"
             }
             if (ticTacToeBoard[i][1] == "X"){
-                ticTacToeBoardPrint[i][1] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][1] = "${X_COLOR}X$RESET"
             } else if (ticTacToeBoard[i][1] == "O"){
-                ticTacToeBoardPrint[i][1] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][1] = "${O_COLOR}O$RESET"
             }
             if (ticTacToeBoard[i][2] == "X"){
-                ticTacToeBoardPrint[i][2] = "${YELLOW}X$RESET"
+                ticTacToeBoardPrint[i][2] = "${X_COLOR}X$RESET"
             } else if (ticTacToeBoard[i][2] == "O"){
-                ticTacToeBoardPrint[i][2] = "${MAGENTA}O$RESET"
+                ticTacToeBoardPrint[i][2] = "${O_COLOR}O$RESET"
             }
             println(" ${ticTacToeBoardPrint[i][0]}   ${ticTacToeBoardPrint[i][1]}   ${ticTacToeBoardPrint[i][2]}")
         }
