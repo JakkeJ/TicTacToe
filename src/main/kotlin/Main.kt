@@ -142,13 +142,12 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
             println("${GREEN}Congratulations, ${player1.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}$RESET")
             player1.score++
             println("The score is now:")
-            println("${GREEN}${player1.name} ${player1.score} - ${player2.score} ${player2.name} $RESET")
         } else if(winList[1] == player2Mark){
             println("${GREEN}Congratulations, ${player2.name}, you won with ${winList[1]} on $typeOfWin ${winList[0].toInt()}$RESET")
             player2.score++
             println("The score is now:")
-            println("${GREEN}${player1.name} ${player1.score} - ${player2.score} ${player2.name} $RESET")
         }
+        println("${GREEN}${player1.name} ${player1.score} - ${player2.score} ${player2.name} $RESET")
     }
 
     //Restarts the game if input is Y or y
@@ -167,8 +166,8 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
     //Resets the game board
     private fun resetGameBoard(){
         clearScreen()
-        println("$BLUE Swapping who plays first$RESET")
-        println("$MAGENTA ${player2.name}, you are now playing first!$RESET")
+        println("${BLUE}Swapping who plays first$RESET")
+        println("$MAGENTA${player2.name}, you are now playing first!$RESET")
         println("")
         ticTacToeBoard = mutableListOf()
         ticTacToeBoardPrint = mutableListOf()
@@ -308,3 +307,51 @@ class TicTacToe(private var player1: Player, private var player2: Player): Game(
         }
     }
 }
+
+/*
+Klasse Player - variablene lagrer navn, spillernummer, poeng
+
+Abstrakt klasse "Game" - variablene har "type spill" og "antall spillere"
+interface "GameBoard" - funksjonene isValidMove og createBoard
+
+Klasse TicTacToe - Arver abstrakt klasse "Game" og interface "GameBoard", har init-funksjon som printer "How to play"
+
+Lambda-funksjon: isANumber - input parameter "toCheck" (en String) -> bruker todoubleornull, returnerer en boolean
+
+Høyere ordens funksjon: validateInput - sjekker at det er 1-9, ikke float/double eller null - husket hvordan det funket i forrige uke...
+
+
+Metoder i TicTacToe (utenom lambda og HO funksjon):
+
+isValidMove - returnerer boolean, sjekker om rute har "-" eller ikke
+
+createBoard - override - lager brettet i for-løkke 0 til (men ikke med) boardSize
+
+checkRows, checkColumns, checkDiagonals - sjekker om noen har vunnet, returnerer liste = [rad/kolonne/diagonal der spiller vant, og spillermerke]
+
+printGameBoard - skriver ut spillebrettet
+
+checkWinner - Sjekker om X eller O vant, og printer ut score
+
+restartGame - spør bruker om å starte på nytt eller avslutte - tar kun imot "y" eller "n"
+
+resetGameBoard - Bytter hvem som spiller først, sletter alt som er i listene slik at de er tomme.
+
+cleanPlayerInput - gjør slik at 1-9 blir til rad og kolonne siden vi MÅTTE ha dette i isValid
+
+validMoves - returnerer en liste over gyldige trekk i formatet 1-9 slik input er i spillet.
+
+printValidMoves - skriver ut gyldige trekk.
+
+startGame - Gameloop, tre if sjekker etter vinner og kjører metodene restartGame() og potensielt resetGameBoard().
+		Etter disse kommer en sjekk på uavgjort. Så kommer tre while som sjekker om input er rett
+
+
+klasser X
+arv X
+abstrakt klasse (tips: Game) X
+liste eller array
+init-funksjoner X
+interface X
+lamdafunksjoner (lage egne) og høyere ordens funksjoner X X
+ */
